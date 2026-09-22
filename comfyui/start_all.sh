@@ -15,11 +15,12 @@ if [ -f /root/.env ]; then
   set +a
 fi
 
-# ===== defaults =====
-export CF_TUNNEL_UUID="${CF_TUNNEL_UUID:-REPLACE_WITH_TUNNEL_UUID}"
-export CF_HOSTNAME="${CF_HOSTNAME:your-domain.example}"
+# ===== required tunnel config and runtime defaults =====
+: "${CF_TUNNEL_UUID:?Set CF_TUNNEL_UUID in /root/.env}"
+: "${CF_HOSTNAME:?Set CF_HOSTNAME in /root/.env}"
+export CF_TUNNEL_UUID CF_HOSTNAME
 export CF_LOCAL_PORT="${CF_LOCAL_PORT:-8188}"
-export CF_TUNNEL_NAME="${CF_TUNNEL_NAME:-comfy}"
+export CF_TUNNEL_NAME="${CF_TUNNEL_NAME:-${CF_HOSTNAME}}"
 
 TORCH_PROFILE="${TORCH_PROFILE:-auto}"
 ENV_NAME="${ENV_NAME:-}"
