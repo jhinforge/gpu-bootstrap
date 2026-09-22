@@ -2,10 +2,18 @@
 set -euo pipefail
 
 # ===== AI Forge tunnel config =====
-CF_TUNNEL_NAME="comfy"
-CF_TUNNEL_UUID="REPLACE_WITH_TUNNEL_UUID"
-CF_HOSTNAME="your-domain.example"
-CF_LOCAL_PORT="3000"
+CONFIG_FILE="${CONFIG_FILE:-/root/ollama-forge/config.env}"
+if [ -f "$CONFIG_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$CONFIG_FILE"
+  set +a
+fi
+
+: "${CF_TUNNEL_UUID:?Set CF_TUNNEL_UUID in $CONFIG_FILE}"
+: "${CF_HOSTNAME:?Set CF_HOSTNAME in $CONFIG_FILE}"
+CF_TUNNEL_NAME="${CF_TUNNEL_NAME:-${CF_HOSTNAME}}"
+CF_LOCAL_PORT="${CF_LOCAL_PORT:-3000}"
 
 LOG_FILE="/root/cloudflared.log"
 
