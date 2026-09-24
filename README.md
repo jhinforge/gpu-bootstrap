@@ -13,3 +13,7 @@
 The code in this repository may be outdated and is kept primarily for reference.
 
 For the current project, documentation, and future development, please use the EverSpark Forge repository linked above.
+
+## License
+
+The original gpu-bootstrap project is licensed under the GNU Affero General Public License v3.0 (AGPLv3). See [LICENSE](LICENSE) for the full text.
